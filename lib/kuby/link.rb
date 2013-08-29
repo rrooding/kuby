@@ -3,6 +3,7 @@ require 'kuby/link/api_methods'
 require 'kuby/link/flight_methods'
 require 'kuby/link/navbal_methods'
 require 'kuby/link/paused_methods'
+require 'kuby/link/vessel_methods'
 
 class Kuby::Link
   MIN_TELEMACHUS_VERSION = Gem::Version.new('1.4.6.0')
@@ -13,6 +14,7 @@ class Kuby::Link
   include Kuby::Link::FlightMethods
   include Kuby::Link::NavbalMethods
   include Kuby::Link::PausedMethods
+  include Kuby::Link::VesselMethods
 
   def initialize(options={})
     @host = options.fetch(:host, '127.0.0.1')
