@@ -1,6 +1,7 @@
 require 'multi_json'
 require 'kuby/link/api_methods'
 require 'kuby/link/flight_methods'
+require 'kuby/link/navbal_methods'
 require 'kuby/link/paused_methods'
 
 class Kuby::Link
@@ -10,6 +11,7 @@ class Kuby::Link
 
   include Kuby::Link::ApiMethods
   include Kuby::Link::FlightMethods
+  include Kuby::Link::NavbalMethods
   include Kuby::Link::PausedMethods
 
   def initialize(options={})
