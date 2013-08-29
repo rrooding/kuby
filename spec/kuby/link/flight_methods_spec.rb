@@ -19,6 +19,16 @@ describe Kuby::Link::FlightMethods do
     end
   end
 
+  (1..10).each do |group_no|
+    describe "#actiongroup_#{group_no}" do
+      it "implements the f.ag#{group_no} call" do
+        subject.should_receive(:api_get).with("f.ag#{group_no}")
+
+        subject.send("actiongroup_#{group_no}")
+      end
+    end
+  end
+
   describe '#brake' do
     it 'implements the f.brake call' do
       subject.should_receive(:api_get).with('f.brake')
@@ -27,19 +37,35 @@ describe Kuby::Link::FlightMethods do
     end
   end
 
-  describe '#toggle_gear' do
-    it 'implements the f.gear call' do
-      subject.should_receive(:api_get).with('f.gear')
+  describe '#set_throttle' do
+    it 'implements the f.setThrottle call' do
+      subject.should_receive(:api_set).with('f.setThrottle', 0.5)
 
-      subject.toggle_gear
+      subject.set_throttle(0.5)
     end
-  end
 
-  describe '#toggle_light' do
-    it 'implements the f.light call' do
-      subject.should_receive(:api_get).with('f.light')
+    context 'throttle is larger than 1' do
+      it 'normalizes to 1.0' do
+        subject.should_receive(:api_set).with('f.setThrottle', 1.0)
 
-      subject.toggle_light
+        subject.set_throttle(123)
+      end
+    end
+
+    context 'throttle is not a float or int' do
+      it 'raises an ArgumentError' do
+        expect {
+          subject.set_throttle('a')
+        }.to raise_error ArgumentError
+      end
+    end
+
+    context 'throttle is smaller than 0' do
+      it 'normalizes to 0.0' do
+        subject.should_receive(:api_set).with('f.setThrottle', 0.0)
+
+        subject.set_throttle(-0.4)
+      end
     end
   end
 
@@ -48,6 +74,18 @@ describe Kuby::Link::FlightMethods do
       subject.should_receive(:api_get).with('f.stage')
 
       subject.stage!
+    end
+  end
+
+  describe '#throttle' do
+    it 'implements the f.throttle call' do
+      subject.should_receive(:api_get).with('f.throttle')
+
+      subject.throttle
+    end
+
+    it 'returns a float' do
+      expect(subject.throttle).to be_an_instance_of Float
     end
   end
 
@@ -80,6 +118,38 @@ describe Kuby::Link::FlightMethods do
       subject.should_receive(:api_get).with('f.throttleZero')
 
       subject.throttle_zero
+    end
+  end
+
+  describe '#toggle_gear' do
+    it 'implements the f.gear call' do
+      subject.should_receive(:api_get).with('f.gear')
+
+      subject.toggle_gear
+    end
+  end
+
+  describe '#toggle_light' do
+    it 'implements the f.light call' do
+      subject.should_receive(:api_get).with('f.light')
+
+      subject.toggle_light
+    end
+  end
+
+  describe '#toggle_rcs' do
+    it 'implements the f.rcs call' do
+      subject.should_receive(:api_get).with('f.rcs')
+
+      subject.toggle_rcs
+    end
+  end
+
+  describe '#toggle_sas' do
+    it 'implements the f.sas call' do
+      subject.should_receive(:api_get).with('f.sas')
+
+      subject.toggle_sas
     end
   end
 end

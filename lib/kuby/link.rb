@@ -30,10 +30,14 @@ class Kuby::Link
 
   private
 
+  def api_set(ret, *args)
+    api_get("#{ret}[#{args.join(',')}]")
+  end
+
   def api_get(ret)
     # All Telemachus api methods are GET, the api command is passed in as the 'ret' parameter,
     # the returned result is in the form of: {"ret":"<value>"}
-    res = Excon.get(uri, { tcp_nodelay: true, query: { ret: ret } })
+    res = Excon.get(uri, { tcp_nodelay: true, query: "ret=#{ret}" })
 
     # Parse the result
     data = MultiJson.load(res.body, symbolize_keys: true)
