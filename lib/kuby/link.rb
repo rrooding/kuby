@@ -1,0 +1,3 @@
+class Kuby::Link
+
+end
