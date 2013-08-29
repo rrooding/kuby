@@ -1,5 +1,8 @@
-require "kuby/version"
+require 'kuby/version'
+require 'kuby/link'
 
 module Kuby
-  # Your code goes here...
+  class UnsupportedTelemachusVersion < StandardError; end
+  class ConnectionNotEstablished < StandardError; end
+  class TelemachusConnectionRefused < StandardError; end
 end
