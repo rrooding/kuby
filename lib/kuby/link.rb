@@ -1,5 +1,6 @@
 require 'multi_json'
 require 'kuby/link/api_methods'
+require 'kuby/link/flight_methods'
 require 'kuby/link/paused_methods'
 
 class Kuby::Link
@@ -8,6 +9,7 @@ class Kuby::Link
   attr_reader :host, :port
 
   include Kuby::Link::ApiMethods
+  include Kuby::Link::FlightMethods
   include Kuby::Link::PausedMethods
 
   def initialize(options={})
