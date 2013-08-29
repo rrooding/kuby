@@ -1,6 +1,8 @@
 # Kuby
 
-TODO: Write a gem description
+[![Build Status](https://travis-ci.org/rrooding/kuby.png?branch=develop)](https://travis-ci.org/rrooding/kuby)
+
+Crash your Kerbals using Ruby!
 
 ## Installation
 
