@@ -1,5 +1,6 @@
 require 'multi_json'
 require 'kuby/link/api_methods'
+require 'kuby/link/paused_methods'
 
 class Kuby::Link
   MIN_TELEMACHUS_VERSION = Gem::Version.new('1.4.6.0')
@@ -7,6 +8,7 @@ class Kuby::Link
   attr_reader :host, :port
 
   include Kuby::Link::ApiMethods
+  include Kuby::Link::PausedMethods
 
   def initialize(options={})
     @host = options.fetch(:host, '127.0.0.1')
@@ -15,9 +17,8 @@ class Kuby::Link
   end
 
   def connect!
-    @conn ||= Excon.new(uri, tcp_no_delay: true)
-
-    # Raise error when the telemachus version is not supported
+    # Raise error when the telemachus version is not supported, this also automatically
+    # checks if the connection can be made
     unless supported_version?
       raise Kuby::UnsupportedTelemachusVersion.new("Please install Telemachus #{MIN_TELEMACHUS_VERSION} or higher")
     end
@@ -28,11 +29,9 @@ class Kuby::Link
   private
 
   def api_get(ret)
-    raise Kuby::ConnectionNotEstablished.new unless @conn
-
     # All Telemachus api methods are GET, the api command is passed in as the 'ret' parameter,
     # the returned result is in the form of: {"ret":"<value>"}
-    res = @conn.get({ query: { ret: ret } })
+    res = Excon.get(uri, { tcp_nodelay: true, query: { ret: ret } })
 
     # Parse the result
     data = MultiJson.load(res.body, symbolize_keys: true)
