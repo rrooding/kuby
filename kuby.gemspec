@@ -11,6 +11,7 @@ Gem::Specification.new do |gem|
   gem.description   = %q{Crash your Kerbals using Ruby!}
   gem.summary       = %q{Crash your Kerbals using Ruby!}
   gem.homepage      = "https://github.com/rrooding/kuby"
+  gem.license       = 'MIT'
 
   gem.files         = `git ls-files`.split($/)
   gem.executables   = gem.files.grep(%r{^bin/}).map{ |f| File.basename(f) }
