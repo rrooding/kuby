@@ -12,7 +12,7 @@ Install the gem:
 
     $ gem install kuby
     
-Make sure you have a recent version of KSP and also install the [Telemachus plugin](http://kerbalspaceport.com/telemachus/).
+Make sure you have a recent version of KSP and also install the [Telemachus plugin](http://www.curse.com/ksp-mods/kerbal/220210-telemachus).
 
 ## Usage
 
