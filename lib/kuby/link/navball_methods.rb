@@ -1,6 +1,6 @@
 module Kuby
   class Link
-    module NavbalMethods
+    module NavballMethods
       def heading
         api_get('n.heading').to_f
       end

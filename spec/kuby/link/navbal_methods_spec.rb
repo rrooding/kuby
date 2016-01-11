@@ -3,11 +3,11 @@ require 'spec_helper'
 class DummyClass
 end
 
-describe Kuby::Link::NavbalMethods do
+describe Kuby::Link::NavballMethods do
   subject { DummyClass.new }
 
   before do
-    subject.extend Kuby::Link::NavbalMethods
+    subject.extend Kuby::Link::NavballMethods
     subject.stub(:api_get)
   end
 
