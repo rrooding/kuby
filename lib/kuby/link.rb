@@ -1,4 +1,5 @@
 require 'multi_json'
+require 'excon'
 require 'kuby/link/api_methods'
 require 'kuby/link/flight_methods'
 require 'kuby/link/navbal_methods'
