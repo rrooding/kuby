@@ -58,7 +58,7 @@ describe Kuby::Link do
 
     context 'connection ok' do
        it 'returns true' do
-         expect(subject.connect!).to be_true
+         expect(subject.connect!).to eq true
        end
     end
   end
