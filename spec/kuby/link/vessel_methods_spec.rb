@@ -8,12 +8,12 @@ describe Kuby::Link::VesselMethods do
 
   before do
     subject.extend Kuby::Link::VesselMethods
-    subject.stub(:api_get)
+    allow(subject).to receive(:api_get)
   end
 
   describe '#altitude' do
     it 'implements the v.altitude call' do
-      subject.should_receive(:api_get).with('v.altitude')
+      expect(subject).to receive(:api_get).with('v.altitude')
 
       subject.altitude
     end
@@ -25,7 +25,7 @@ describe Kuby::Link::VesselMethods do
 
   describe '#height' do
     it 'implements the v.heightFromTerrain call' do
-      subject.should_receive(:api_get).with('v.heightFromTerrain')
+      expect(subject).to receive(:api_get).with('v.heightFromTerrain')
 
       subject.height
     end
@@ -37,7 +37,7 @@ describe Kuby::Link::VesselMethods do
 
   describe '#terrain_height' do
     it 'implements the v.terrainHeight call' do
-      subject.should_receive(:api_get).with('v.terrainHeight')
+      expect(subject).to receive(:api_get).with('v.terrainHeight')
 
       subject.terrain_height
     end
@@ -49,7 +49,7 @@ describe Kuby::Link::VesselMethods do
 
   describe '#mission_time' do
     it 'implements the v.missionTime call' do
-      subject.should_receive(:api_get).with('v.missionTime')
+      expect(subject).to receive(:api_get).with('v.missionTime')
 
       subject.mission_time
     end
@@ -61,7 +61,7 @@ describe Kuby::Link::VesselMethods do
 
   describe '#surface_velocity' do
     it 'implements the v.surfaceVelocity call' do
-      subject.should_receive(:api_get).with('v.surfaceVelocity')
+      expect(subject).to receive(:api_get).with('v.surfaceVelocity')
 
       subject.surface_velocity
     end
@@ -73,7 +73,7 @@ describe Kuby::Link::VesselMethods do
 
   describe '#surface_velocity_x' do
     it 'implements the v.surfaceVelocityx call' do
-      subject.should_receive(:api_get).with('v.surfaceVelocityx')
+      expect(subject).to receive(:api_get).with('v.surfaceVelocityx')
 
       subject.surface_velocity_x
     end
@@ -85,7 +85,7 @@ describe Kuby::Link::VesselMethods do
 
   describe '#surface_velocity_y' do
     it 'implements the v.surfaceVelocityy call' do
-      subject.should_receive(:api_get).with('v.surfaceVelocityy')
+      expect(subject).to receive(:api_get).with('v.surfaceVelocityy')
 
       subject.surface_velocity_y
     end
@@ -97,7 +97,7 @@ describe Kuby::Link::VesselMethods do
 
   describe '#surface_velocity_z' do
     it 'implements the v.surfaceVelocityz call' do
-      subject.should_receive(:api_get).with('v.surfaceVelocityz')
+      expect(subject).to receive(:api_get).with('v.surfaceVelocityz')
 
       subject.surface_velocity_z
     end
@@ -109,7 +109,7 @@ describe Kuby::Link::VesselMethods do
 
   describe '#angular_velocity' do
     it 'implements the v.angularVelocity call' do
-      subject.should_receive(:api_get).with('v.angularVelocity')
+      expect(subject).to receive(:api_get).with('v.angularVelocity')
 
       subject.angular_velocity
     end
@@ -121,7 +121,7 @@ describe Kuby::Link::VesselMethods do
 
   describe '#orbital_velocity' do
     it 'implements the v.orbitalVelocity call' do
-      subject.should_receive(:api_get).with('v.orbitalVelocity')
+      expect(subject).to receive(:api_get).with('v.orbitalVelocity')
 
       subject.orbital_velocity
     end
@@ -133,7 +133,7 @@ describe Kuby::Link::VesselMethods do
 
   describe '#surface_speed' do
     it 'implements the v.surfaceSpeed call' do
-      subject.should_receive(:api_get).with('v.surfaceSpeed')
+      expect(subject).to receive(:api_get).with('v.surfaceSpeed')
 
       subject.surface_speed
     end
@@ -145,7 +145,7 @@ describe Kuby::Link::VesselMethods do
 
   describe '#vertical_speed' do
     it 'implements the v.verticalSpeed call' do
-      subject.should_receive(:api_get).with('v.verticalSpeed')
+      expect(subject).to receive(:api_get).with('v.verticalSpeed')
 
       subject.vertical_speed
     end
@@ -157,7 +157,7 @@ describe Kuby::Link::VesselMethods do
 
   describe '#atmospheric_density' do
     it 'implements the v.atmosphericDensity call' do
-      subject.should_receive(:api_get).with('v.atmosphericDensity')
+      expect(subject).to receive(:api_get).with('v.atmosphericDensity')
 
       subject.atmospheric_density
     end
@@ -169,7 +169,7 @@ describe Kuby::Link::VesselMethods do
 
   describe '#lat' do
     it 'implements the v.lat call' do
-      subject.should_receive(:api_get).with('v.lat')
+      expect(subject).to receive(:api_get).with('v.lat')
 
       subject.lat
     end
@@ -177,7 +177,7 @@ describe Kuby::Link::VesselMethods do
 
   describe '#long' do
     it 'implements the v.long call' do
-      subject.should_receive(:api_get).with('v.long')
+      expect(subject).to receive(:api_get).with('v.long')
 
       subject.long
     end
@@ -185,7 +185,7 @@ describe Kuby::Link::VesselMethods do
 
   describe '#dynamic_pressure' do
     it 'implements the v.dynamicPressure call' do
-      subject.should_receive(:api_get).with('v.dynamicPressure')
+      expect(subject).to receive(:api_get).with('v.dynamicPressure')
 
       subject.dynamic_pressure
     end
@@ -197,7 +197,7 @@ describe Kuby::Link::VesselMethods do
 
   describe '#name' do
     it 'implements the v.name call' do
-      subject.should_receive(:api_get).with('v.name')
+      expect(subject).to receive(:api_get).with('v.name')
 
       subject.name
     end

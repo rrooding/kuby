@@ -8,12 +8,12 @@ describe Kuby::Link::NavballMethods do
 
   before do
     subject.extend Kuby::Link::NavballMethods
-    subject.stub(:api_get)
+    allow(subject).to receive(:api_get)
   end
 
   describe '#heading' do
     it 'implements the n.heading call' do
-      subject.should_receive(:api_get).with('n.heading')
+      expect(subject).to receive(:api_get).with('n.heading')
 
       subject.heading
     end
@@ -25,7 +25,7 @@ describe Kuby::Link::NavballMethods do
 
   describe '#pitch' do
     it 'implements the n.pitch call' do
-      subject.should_receive(:api_get).with('n.pitch')
+      expect(subject).to receive(:api_get).with('n.pitch')
 
       subject.pitch
     end
@@ -37,7 +37,7 @@ describe Kuby::Link::NavballMethods do
 
   describe '#roll' do
     it 'implements the n.roll call' do
-      subject.should_receive(:api_get).with('n.roll')
+      expect(subject).to receive(:api_get).with('n.roll')
 
       subject.roll
     end
