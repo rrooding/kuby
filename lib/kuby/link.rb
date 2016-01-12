@@ -4,6 +4,7 @@ require 'kuby/link/api_methods'
 require 'kuby/link/flight_methods'
 require 'kuby/link/navball_methods'
 require 'kuby/link/paused_methods'
+require 'kuby/link/resource_methods'
 require 'kuby/link/vessel_methods'
 
 class Kuby::Link
@@ -15,6 +16,7 @@ class Kuby::Link
   include Kuby::Link::FlightMethods
   include Kuby::Link::NavballMethods
   include Kuby::Link::PausedMethods
+  include Kuby::Link::ResourceMethods
   include Kuby::Link::VesselMethods
 
   def initialize(options={})
