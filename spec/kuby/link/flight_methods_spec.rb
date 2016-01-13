@@ -70,15 +70,15 @@ describe Kuby::Link::FlightMethods do
   end
 
   describe '#pitch_yaw_roll_xyz' do
-    it 'implements the v.PitchYawRollXYZ call' do
-      expect(subject).to receive(:api_set).with('v.PitchYawRollXYZ', [0.5, 0.5, 0.5, 0.5, 0.5, 0.5] )
+    it 'implements the v.setPitchYawRollXYZ call' do
+      expect(subject).to receive(:api_set).with('v.setPitchYawRollXYZ', [0.5, 0.5, 0.5, 0.5, 0.5, 0.5] )
 
       subject.pitch_yaw_roll_xyz = { pitch:90.0, yaw:90.0, roll:90.0, x:0.5, y:0.5, z:0.5}
     end
 
     context 'pitch is larger than 180' do
       it 'normalizes to 1.0' do
-        expect(subject).to receive(:api_set).with('v.PitchYawRollXYZ', [1.0, 1.0, 1.0, 1.0, 1.0, 1.0])
+        expect(subject).to receive(:api_set).with('v.setPitchYawRollXYZ', [1.0, 1.0, 1.0, 1.0, 1.0, 1.0])
 
         subject.pitch_yaw_roll_xyz = { pitch: 370, yaw: 370, roll: 370, x: 370, y: 370, z: 370 }
       end
@@ -94,7 +94,7 @@ describe Kuby::Link::FlightMethods do
 
     context 'pitch is smaller than 0' do
       it 'normalizes to 0.0' do
-        expect(subject).to receive(:api_set).with('v.PitchYawRollXYZ', [-0.75,-0.75,-0.75,0,0,0])
+        expect(subject).to receive(:api_set).with('v.setPitchYawRollXYZ', [-0.75,-0.75,-0.75,0,0,0])
 
         subject.pitch_yaw_roll_xyz = {pitch:-135.0, yaw:-135.0, roll:-135.0, x:-0.4, y:-0.4, z:-0.4}
       end
