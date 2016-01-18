@@ -8,19 +8,19 @@ describe Kuby::Link::PausedMethods do
 
   before do
     subject.extend Kuby::Link::PausedMethods
-    subject.stub(:api_get)
+    allow(subject).to receive(:api_get)
   end
 
   describe '#paused?' do
     it 'implements the p.paused call' do
-      subject.should_receive(:api_get).with('p.paused')
+      expect(subject).to receive(:api_get).with('p.paused')
 
       subject.paused?
     end
 
     context 'ret is non-zero' do
       before do
-        subject.stub(:api_get).and_return '1'
+        allow(subject).to receive(:api_get).and_return '1'
       end
 
       it 'returns true' do
@@ -30,7 +30,7 @@ describe Kuby::Link::PausedMethods do
 
     context 'ret is zero' do
       before do
-        subject.stub(:api_get).and_return '0'
+        allow(subject).to receive(:api_get).and_return '0'
       end
 
       it 'returns false' do
@@ -42,7 +42,7 @@ describe Kuby::Link::PausedMethods do
   describe '#pause_state' do
     context 'not paused' do
       before do
-        subject.stub(:api_get).and_return '0'
+        allow(subject).to receive(:api_get).and_return '0'
       end
 
       it 'returns :not_paused' do
@@ -52,7 +52,7 @@ describe Kuby::Link::PausedMethods do
 
     context 'flight paused' do
       before do
-        subject.stub(:api_get).and_return '1'
+        allow(subject).to receive(:api_get).and_return '1'
       end
 
       it 'returns :flight_paused' do
@@ -62,7 +62,7 @@ describe Kuby::Link::PausedMethods do
 
     context 'out of power' do
       before do
-        subject.stub(:api_get).and_return '2'
+        allow(subject).to receive(:api_get).and_return '2'
       end
 
       it 'returns :out_of_power' do
@@ -72,7 +72,7 @@ describe Kuby::Link::PausedMethods do
 
     context 'antenna disabled' do
       before do
-        subject.stub(:api_get).and_return '3'
+        allow(subject).to receive(:api_get).and_return '3'
       end
 
       it 'returns :antenna_disabled' do
@@ -82,7 +82,7 @@ describe Kuby::Link::PausedMethods do
 
     context 'vessel without antenna' do
       before do
-        subject.stub(:api_get).and_return '4'
+        allow(subject).to receive(:api_get).and_return '4'
       end
 
       it 'returns :vessel_wo_antenna' do
@@ -92,7 +92,7 @@ describe Kuby::Link::PausedMethods do
 
     context 'unknown pause state' do
       before do
-        subject.stub(:api_get).and_return '5'
+        allow(subject).to receive(:api_get).and_return '5'
       end
 
       it 'returns :unknown_pause_state' do

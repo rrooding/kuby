@@ -16,14 +16,38 @@ module Kuby
         api_get('f.brake')
       end
 
-      def set_throttle(t)
-        if t > 1.0
-          t = 1.0
-        elsif t < 0.0
-          t = 0.0
-        end
+      def yaw=(yaw)
+        api_set('v.setYaw', degree_to_f(yaw))
+      end
 
-        api_set('f.setThrottle', t)
+      def pitch=(pitch)
+        api_set('v.setPitch', degree_to_f(pitch))
+      end
+
+      def roll=(roll)
+        api_set('v.setRoll', degree_to_f(roll))
+      end
+
+      def fly_by_wire=(state)
+        api_set('v.setFbW', state ? 1 : 0)
+      end
+
+      # One command set everything
+      # [float pitch, yaw, roll, x, y, z]
+      def pitch_yaw_roll_xyz=(pitch:, yaw:, roll:, x:, y:, z:)
+        args = [
+          degree_to_f(pitch),
+          degree_to_f(yaw),
+          degree_to_f(roll),
+          limiter(x, max: 1.0, min: 0.0),
+          limiter(y, max: 1.0, min: 0.0),
+          limiter(z, max: 1.0, min: 0.0)
+       ]
+        api_set('v.setPitchYawRollXYZ', args)
+      end
+
+      def set_throttle(t)
+        api_set('f.setThrottle', limiter(t, max: 1.0, min: 0.0))
       end
 
       def stage!
@@ -64,6 +88,30 @@ module Kuby
 
       def toggle_sas
         api_get('f.sas')
+      end
+
+      def g_force
+        api_get('v.geeForce')
+      end
+
+      private
+      # Degrees as float -180 -> 180
+      # returns -1 -> 1
+      def degree_to_f(degree)
+        raise ArgumentError unless degree.is_a? Numeric
+        limiter(degree / 180, max: 1.0, min: -1.0)
+      end
+
+      def limiter(value, max:, min:)
+        raise ArgumentError unless value.is_a? Numeric
+        value = value.to_f
+        if value > max
+          max
+        elsif value < min
+          min
+        else
+          value
+        end
       end
     end
   end

@@ -8,12 +8,12 @@ describe Kuby::Link::ApiMethods do
 
   before do
     subject.extend Kuby::Link::ApiMethods
-    subject.stub(:api_get)
+    allow(subject).to receive(:api_get)
   end
 
   describe '#version' do
     it 'implements the a.version call' do
-      subject.should_receive(:api_get).with('a.version')
+      expect(subject).to receive(:api_get).with('a.version')
 
       subject.version
     end
@@ -23,7 +23,7 @@ describe Kuby::Link::ApiMethods do
     end
 
     it 'sets the version to the returned version' do
-      subject.stub(:api_get).and_return('1.2.3.4')
+      allow(subject).to receive(:api_get).and_return('1.2.3.4')
 
       expect(subject.version.to_s).to eq '1.2.3.4'
     end

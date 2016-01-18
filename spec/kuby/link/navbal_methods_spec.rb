@@ -3,17 +3,17 @@ require 'spec_helper'
 class DummyClass
 end
 
-describe Kuby::Link::NavbalMethods do
+describe Kuby::Link::NavballMethods do
   subject { DummyClass.new }
 
   before do
-    subject.extend Kuby::Link::NavbalMethods
-    subject.stub(:api_get)
+    subject.extend Kuby::Link::NavballMethods
+    allow(subject).to receive(:api_get)
   end
 
   describe '#heading' do
     it 'implements the n.heading call' do
-      subject.should_receive(:api_get).with('n.heading')
+      expect(subject).to receive(:api_get).with('n.heading')
 
       subject.heading
     end
@@ -25,7 +25,7 @@ describe Kuby::Link::NavbalMethods do
 
   describe '#pitch' do
     it 'implements the n.pitch call' do
-      subject.should_receive(:api_get).with('n.pitch')
+      expect(subject).to receive(:api_get).with('n.pitch')
 
       subject.pitch
     end
@@ -37,7 +37,7 @@ describe Kuby::Link::NavbalMethods do
 
   describe '#roll' do
     it 'implements the n.roll call' do
-      subject.should_receive(:api_get).with('n.roll')
+      expect(subject).to receive(:api_get).with('n.roll')
 
       subject.roll
     end
